@@ -27,46 +27,66 @@ rank_data<-as.numeric(rank_data)
 head(rank_data)
 
 #Using CSS selectors to scrape the title section
+title_data_html <- html_nodes(webpage, '.lister-item-header a')
 
 #html to text 
+title_data <- html_text(title_data_html)
 
 #look at data
+head(title_data)
 
 #Using CSS selectors to scrape the description section
+description_data_html <- html_nodes(webpage, '.ratings-bar+ .text-muted')
 
 #Converting the description data to text
+description_data <- html_text(description_data_html)
 
 #look at data
+head(description_data)
 
 #Data-Preprocessing: removing '\n'
+description_data <- gsub("\n", "", description_data)
+head(description_data)
 
-#Using CSS selectors to scrap the Movie runtime section
+#Using CSS selectors to scrape the Movie runtime section
+runtime_data_html <- html_nodes(webpage, '.text-muted .runtime')
 
 #Converting the movie runtime data to text
+runtime_data <- html_text(runtime_data_html)
 
 #Let's have a look at the movie runtime
+head(runtime_data)
 
 #Data-Preprocessing: removing mins and converting it to numerical
-
+runtime_data <- gsub(" min", "", runtime_data)
+runtime_data <- as.numeric(runtime_data)
 
 #Let's have another look at the runtime data
+head(runtime_data)
 
+#Using CSS selectors to scrape the movie genre section
+genre_data_html <- html_nodes(webpage, '.genre')
 
 #Converting the genre data to text
+genre_data <- html_text(genre_data_html)
 
-#Let's have a look at the genre
+#Let's have a look at the genres
+head(genre_data)
 
 #Data-Preprocessing: removing \n
+genre_data <- gsub("\n", "", genre_data)
 
 #Data-Preprocessing: removing excess spaces
+genre_data <- gsub("            ", "", genre_data)
 
 #taking only the first genre of each movie
+
 
 #Convering each genre from text to factor
 
 #Let's have another look at the genre data
 
-#Using CSS selectors to scrap the IMDB rating section
+#Using CSS selectors to scrape the IMDB rating section
 
 #Converting the ratings data to text
 
@@ -77,7 +97,7 @@ head(rank_data)
 #Let's have another look at the ratings data
 
 
-#Using CSS selectors to scrap the directors section
+#Using CSS selectors to scrape the directors section
 
 #Converting the directors data to text
 
